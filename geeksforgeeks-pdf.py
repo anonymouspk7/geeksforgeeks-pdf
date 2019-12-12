@@ -21,7 +21,7 @@ for link in BeautifulSoup(response, parse_only=SoupStrainer('a')):
             
 
 #print to_crawl
-print len(to_crawl)
+print (len(to_crawl))
 count=0
 
 def get_page(page):
@@ -39,15 +39,15 @@ def save_as_pdf(s):
         html=get_page(s)
         client.convertHtml(html, output_file)
         output_file.close()
-    except pdfcrowd.Error,why:
-        print 'Failed:', why
+    except pdfcrowd.Error as why:
+        print ('Failed:', why)
 
 
 while len(to_crawl):
     b=to_crawl.pop()
     if b.find('http://www.geeksforgeeks.org')==0 and b not in crawled and b.find('forums')<0:
         count=count+1
-        print count
+        print (count)
         crawled.append(b)
         status, response = http.request(b)
         for link in BeautifulSoup(response, parse_only=SoupStrainer('a')):
@@ -64,13 +64,13 @@ amazon=[]
 
 for st in crawled:
     if st.find('amazon')>=0 and st.find('#')<0 and st.find('tag')<0 and st.find('forum')<0:
-        print st
+        print (st)
         amazon.append(st)
 
 
 
-print "Finished"
-print len(amazon)
+print ("Finished")
+print (len(amazon))
         
   
 for page in amazon:
